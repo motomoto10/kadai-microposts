@@ -5,11 +5,12 @@
         <h1>Sign up</h1>
     </div>
     
+    <div class="row">
     <div class="col-sm-6 offset-sm-3">
         
         {!! Form::open(['route' => 'signup.post']) !!}
             <div class="form-group">
-                {!! Form::larabel('name','Name') !!}
+                {!! Form::label('name','Name') !!}
                 {!! Form::text('name',old('name'),['class' => 'form-control']) !!}
             </div>
     
@@ -33,6 +34,3 @@
         </div>
     </div>
 @endsection
-
-        
-    </div>
