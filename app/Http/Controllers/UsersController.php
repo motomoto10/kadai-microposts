@@ -45,7 +45,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         
         // 関係するモデルの件数をロード
-        $user = User::findOrFail($id);
+        $user->loadRelationshipCounts();
         
         // ユーザのフォロー一覧を取得
         $followings = $user->followings()->paginate(10);
@@ -80,4 +80,5 @@ class UsersController extends Controller
             'users' => $followers,
         ]);
     }
+    
 }

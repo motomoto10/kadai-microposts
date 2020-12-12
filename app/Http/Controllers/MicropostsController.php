@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
 class MicropostsController extends Controller
 {
     public function index()
@@ -46,4 +48,21 @@ class MicropostsController extends Controller
         
         return back();
     }
+    
+    public function favorite_post($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        
+        // 関係するモデルの件数をロード
+        $user->loadRelationshipCounts();
+        
+        // ユーザのお気に入りしたユーザーを取得
+        $favorits = $user->favorite_users()->paginate(10);
+        
+        // フォロー一覧ビューでそれらを表示
+        return view('users.favorites',[
+            'user' => $user,
+            'microposts' => $favorits,
+        ]);
+   }
 }
