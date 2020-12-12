@@ -142,10 +142,8 @@ class User extends Authenticatable
     {
         // すでにいいねしているかの確認
         $exist = $this->is_favorites($micropostId);
-        // 対象が自分自身かどうかの確認
-        $its_me = $this->id == $micropostId;
         
-        if($exist || $its_me) {
+        if($exist) {
             return false;
         }else {
             $this->favorites()->attach($micropostId);
@@ -157,10 +155,8 @@ class User extends Authenticatable
     {
         // すでにいいねしているかの確認
         $exist = $this->is_favorites($micropostId);
-        // 対象が自分自身かどうかの確認
-        $its_me = $this->id == $micropostId;
         
-        if($exist || $its_me) {
+        if($exist) {
             $this->favorites()->detach($micropostId);
             return true;
         }else {
